@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IActionEX")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a258a6028925bc363179b840ee66d5f9569fcdf9")]
 [assembly: System.Reflection.AssemblyProductAttribute("IActionEX")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IActionEX")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
