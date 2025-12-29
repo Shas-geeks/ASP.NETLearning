@@ -5,31 +5,39 @@ namespace IActionEX.Properties
 {
     public class HomeController : Controller
     {
+        [Route("book")]
         public IActionResult Index()
         {
             // If Book id is not supplied in URL 
-            if(!Request.Query.ContainsKey("bookID"))
+            if(Convert.ToBoolean(Request.Query.ContainsKey("bookID"))==false)
             {
                 
-                return Content("Book ID Not Supplied ");
+                return BadRequest("Book ID Not Supplied ");
             }
             // IF Book ID is supplied with empty 
-            if(string.IsNullOrEmpty(Convert.ToString(Request.Query.ContainsKey("bookID"))))
+            if(string.IsNullOrEmpty(Request.Query["bookID"]))
             {
-                return Content("Book Id Can't Be Empty ");
+                return BadRequest("Book Id Can't Be Empty ");
             }
             // Book ID should be 1 - 1000 in between 
             int bookID = Convert.ToInt32(ControllerContext.HttpContext.Request.Query["bookID"]);
-            if(bookID<=0)
+            if (bookID < 0 || bookID > 1000)
+                
+                return BadRequest("BookID must be within (0-1000) ");
+            //else if(bookID >= 0 || bookID <= 1000)
+            //{
+            //    return Content("You Can Acces The Databases");
+            //}
+            if (!Convert.ToBoolean(Request.Query["isLoggedIn"]))
             {
-                return Content("BookID can not be less than 0");
+                Response.StatusCode = 401;
+                return Unauthorized("User Must Be Authenticated Daa !!");
+                //Here Response Body will be Empty 
+                //return StatusCode(401);
+            }
+            //return PhysicalFile("C:\\Users\\2408696\\Downloads\\PAT – PYTHON ROADMAP.pdf", "application/pdf", "PythonRoadmap.pdf");
+            return RedirectToAction("Indexfn", "About");
 
-            }
-            if(bookID>1000)
-            {
-                return Content("BookID Can not be more thaan 1000");
-            }
-            return File("C:\\PersonalGitFolder\\Backend\\IAction.NET\\IActionEX\\IActionEX\\wwwroot\\PAT – PYTHON ROADMAP.pdf", "application/pdf");
         }
     }
 }
